@@ -1,5 +1,5 @@
 """Hand-built SVG parts for La Weris (no tracing). All coordinates are plain SVG user units."""
-import math
+import math, os
 from fontTools.ttLib import TTFont
 from fontTools.pens.svgPathPen import SVGPathPen
 from fontTools.pens.boundsPen import BoundsPen
@@ -176,7 +176,7 @@ def tf(inner, x, y, rotate=0, scale=1):
 
 
 # ------------------------------------------------------------------ the portrait seal, 813 x 813, center (406,406)
-def portrait(uid='p'):
+def portrait_v1(uid='p'):
     cx = cy = 406
     o = []
     A = o.append
@@ -298,3 +298,16 @@ def molcajete(uid='m', steam='#EDE6B9', steam_w=5):
     A('<path d="M140,76 C156,68 172,60 188,50" fill="none" stroke="#E5675C" stroke-width="3" stroke-linecap="round"/>')
     A('</g>')
     return ''.join(o)
+
+
+_USER_BODY = None
+
+
+def portrait(uid='p'):
+    """Portrait seal from the user-supplied vector (d576ff73-image.svg, checkerboard clipped away), mapped to the 813 x 813 seal space."""
+    global _USER_BODY
+    if _USER_BODY is None:
+        _USER_BODY = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'portrait_user_body.frag')).read()
+    k = 373.0 / 252.0
+    return ('<g id="%s-retrato-sello" transform="translate(%s %s) scale(%s)"><clipPath id="%s-clip"><circle cx="306" cy="272.5" r="252"/></clipPath>'
+            '<g clip-path="url(#%s-clip)">%s</g></g>' % (uid, n2(406 - 306 * k), n2(406 - 272.5 * k), n2(k), uid, uid, _USER_BODY))

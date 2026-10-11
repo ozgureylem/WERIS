@@ -8,4 +8,6 @@ Rebuilt from scratch to match the identity board mockup. Everything is native sh
 
 Text (flags, wordmark, labels) is converted to outlines: Playfair Display (flags), Norican (script "La Weris"), Poppins (COMIDA CASERA, tagline). Fonts are SIL OFL.
 
-Honest limits: this is a close redraw, not a pixel copy. Portrait, ornaments and molcajete are my own drawing and differ in detail from the mockup (hair texture, face, corn/agave shapes). The script is Norican, the nearest free font, not the mockup's original lettering. Green flag texture is agave only (no arches). The board omits the stock salsa-bowl photo and the small Mexican flag. No CMYK/Pantone; printer converts. Rebuild with `scripts/build_redraw.py`.
+Portrait: uses the vector supplied by the client (`reference/portrait_user_supplied_original.svg`, 427 shapes after cropping to the seal circle; its fake checkerboard background was clipped away). The original file's metadata says it was produced with an AI tool (Recraft), so confirm usage rights before commercial use. The molcajete, flag illustrations and layout are my own drawing.
+
+Honest limits: this is a close redraw, not a pixel copy. The script is Norican, the nearest free font, not the mockup's original lettering. Green flag texture is agave only (no arches). The board omits the stock salsa-bowl photo and the small Mexican flag. No CMYK/Pantone; printer converts. Rebuild with `scripts/build_redraw.py`.
