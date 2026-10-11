@@ -243,7 +243,7 @@ def stamp(fab, lay, cx, cy, angle=0):
 FW_, FH_ = 1090, 3000
 
 
-def flag_art(kind, badge):
+def flag_art(kind, badge, pattern_only=False):
     S = 2
     W2, H2 = FW_ * S, FH_ * S
     pts = silhouette(W2, H2)
@@ -255,7 +255,7 @@ def flag_art(kind, badge):
         bg, tag_txt = GREEN, 'Cocina Regional'
     else:
         bg, tag_txt = CRIMSON, 'El Sabor del Chile'
-    fab = Image.new('RGBA', (W2, H2), bg)
+    fab = Image.new('RGBA', (W2, H2), (0, 0, 0, 0) if pattern_only else bg)
 
     badge_d = int(0.54 * W2)
     bcx, bcy = int(0.366 * W2), int(0.088 * H2 + badge_d / 2)
@@ -296,6 +296,8 @@ def flag_art(kind, badge):
                 continue
             stamp(fab, agave_layer(int(sz * W2), fill, outl, rib), cx, cy, 0)
 
+    if pattern_only:
+        return fab
     # type, reading upward like the mockup
     hero = fit_img(PLAY_BI, 'LA WERIS', int(0.50 * H2), FLAG_CREAM).rotate(90, expand=True)
     sub = fit_img(PLAY_B, 'COMIDA CASERA', int(0.41 * H2), FLAG_YELLOW).rotate(90, expand=True)
